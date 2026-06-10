@@ -19,14 +19,16 @@
         <h1 id="appTitle">Zurich Padel Cup</h1>
       </div>
       <div class="header-actions">
+        <span id="syncStatus" class="sync-status">Conectando</span>
+        <button id="organizerBtn" class="organizer-button" type="button">Acceso organizador</button>
         <button id="exportBtn" class="icon-button" type="button" title="Exportar datos" aria-label="Exportar datos">
           <span aria-hidden="true">↓</span>
         </button>
-        <label class="icon-button file-button" title="Importar datos" aria-label="Importar datos">
+        <label class="icon-button file-button organizer-only" title="Importar datos" aria-label="Importar datos">
           <span aria-hidden="true">↑</span>
           <input id="importInput" type="file" accept="application/json" />
         </label>
-        <button id="resetBtn" class="icon-button danger" type="button" title="Reiniciar torneo" aria-label="Reiniciar torneo">
+        <button id="resetBtn" class="icon-button danger organizer-only" type="button" title="Reiniciar torneo" aria-label="Reiniciar torneo">
           <span aria-hidden="true">×</span>
         </button>
       </div>
@@ -154,6 +156,28 @@
       </div>
     </template>
 
+    <dialog id="authDialog" class="auth-dialog">
+      <form id="authForm" method="dialog">
+        <div class="auth-dialog-head">
+          <div>
+            <h2>Acceso organizador</h2>
+            <p>Recibirás un enlace seguro por email para editar el torneo.</p>
+          </div>
+          <button id="closeAuthBtn" class="icon-button" type="button" aria-label="Cerrar">×</button>
+        </div>
+        <label>
+          Email del organizador
+          <input id="organizerEmail" type="email" autocomplete="email" required />
+        </label>
+        <p id="authMessage" class="auth-message" aria-live="polite"></p>
+        <div class="auth-actions">
+          <button id="logoutBtn" class="secondary-action" type="button" hidden>Cerrar sesión</button>
+          <button id="sendMagicLinkBtn" class="primary-action" type="submit">Enviar enlace</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="app.js"></script>
   </body>
 </html>
