@@ -1,6 +1,6 @@
 const STORAGE_KEY = "zurich-padel-cup-state-v2";
 const SUPABASE_URL = "https://ltmgdfwtelvzogzufubg.supabase.co";
-const SUPABASE_KEY = "sb_publishable_ltaNA7nnVozoSCOcZIjg";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx0bWdkZnd0ZWx2em9nenVmdWJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExMDI5NjEsImV4cCI6MjA5NjY3ODk2MX0.DwOiQ595-JDF3H9ahhSSqunS7UOu6ZU280NBdN3V0PM";
 const TOURNAMENT_ID = "zurich-padel-2026";
 const GROUPS = ["A", "B"];
 const MAX_TEAMS_PER_GROUP = 4;
