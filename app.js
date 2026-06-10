@@ -99,7 +99,8 @@ async function loadRemoteState() {
   setSyncStatus("Conectando");
   const { data, error } = await dbClient.from("tournaments").select("state").eq("id", TOURNAMENT_ID).single();
   if (error) {
-    setSyncStatus("Sin conexión", "error");
+    console.error("Supabase load failed", error);
+    setSyncStatus(`Sin conexión: ${error.message}`, "error");
     return;
   }
   if (data?.state) state = data.state;
