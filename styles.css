@@ -105,7 +105,38 @@ h3 {
 
 .header-actions {
   display: flex;
+  align-items: center;
   gap: 8px;
+}
+
+.sync-status {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.sync-status.live {
+  color: var(--green);
+}
+
+.sync-status.error {
+  color: var(--red);
+}
+
+.organizer-button {
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--blue-deep);
+  font-weight: 700;
+}
+
+.organizer-button.active {
+  border-color: var(--green);
+  color: var(--green);
 }
 
 .icon-button {
@@ -131,6 +162,47 @@ h3 {
 
 .file-button input {
   display: none;
+}
+
+body.viewer-mode .organizer-only {
+  display: none !important;
+}
+
+.auth-dialog {
+  width: min(460px, calc(100% - 32px));
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.auth-dialog::backdrop {
+  background: rgba(19, 34, 56, 0.48);
+}
+
+.auth-dialog form {
+  display: grid;
+  gap: 18px;
+  padding: 20px;
+}
+
+.auth-dialog-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: start;
+}
+
+.auth-dialog-head p,
+.auth-message {
+  margin: 0;
+  color: var(--muted);
+}
+
+.auth-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
 }
 
 .app-shell {
@@ -595,6 +667,7 @@ tbody tr.qualifies {
 
   .header-actions {
     grid-column: 1 / -1;
+    flex-wrap: wrap;
   }
 
   .overview-band,
