@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zurich Padel Cup</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand-mark" aria-label="Zurich Insurance">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Zurich_Insurance_Group_logo.svg/250px-Zurich_Insurance_Group_logo.svg.png"
+          alt="Zurich Insurance"
+          onerror="this.src='assets/zurich-logo.svg'; this.classList.add('local-logo');"
+        />
+      </div>
+      <div>
+        <h1 id="appTitle">Zurich Padel Cup</h1>
+      </div>
+      <div class="header-actions">
+        <button id="exportBtn" class="icon-button" type="button" title="Exportar datos" aria-label="Exportar datos">
+          <span aria-hidden="true">↓</span>
+        </button>
+        <label class="icon-button file-button" title="Importar datos" aria-label="Importar datos">
+          <span aria-hidden="true">↑</span>
+          <input id="importInput" type="file" accept="application/json" />
+        </label>
+        <button id="resetBtn" class="icon-button danger" type="button" title="Reiniciar torneo" aria-label="Reiniciar torneo">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <section class="overview-band">
+        <div class="metric">
+          <span>Equipos</span>
+          <strong id="teamCount">0</strong>
+        </div>
+        <div class="metric">
+          <span>Partidos jugados</span>
+          <strong id="playedCount">0</strong>
+        </div>
+        <div class="metric">
+          <span>Clasifican</span>
+          <strong id="qualifierCount">0</strong>
+        </div>
+        <div class="metric">
+          <span>Siguiente ronda</span>
+          <strong id="nextRoundName">Semifinales</strong>
+        </div>
+      </section>
+
+      <nav class="tabs" aria-label="Secciones del torneo">
+        <button class="tab active" type="button" data-tab="setup">Configuracion</button>
+        <button class="tab" type="button" data-tab="matches">Resultados</button>
+        <button class="tab" type="button" data-tab="rankings">Ranking</button>
+        <button class="tab" type="button" data-tab="bracket">Ronda final</button>
+      </nav>
+
+      <section id="setup" class="panel active" aria-labelledby="setup-title">
+        <div class="section-head">
+          <div>
+            <h2 id="setup-title">Equipos y formato</h2>
+            <p>Dos grupos de 4 equipos. Cada equipo tiene pareja A y pareja B.</p>
+          </div>
+          <button id="scheduleBtn" class="primary-action" type="button">Generar partidos</button>
+        </div>
+
+        <div class="setup-grid">
+          <form id="settingsForm" class="tool-panel">
+            <label>
+              Nombre del torneo
+              <input id="tournamentName" type="text" autocomplete="off" />
+            </label>
+            <label>
+              Clasificados por grupo
+              <input id="qualifiersPerGroup" type="number" min="1" max="4" step="1" />
+            </label>
+            <label>
+              Puntos por victoria
+              <input id="pointsWin" type="number" min="1" max="5" step="1" />
+            </label>
+            <label>
+              Puntos por derrota
+              <input id="pointsLoss" type="number" min="0" max="2" step="1" />
+            </label>
+          </form>
+
+          <form id="teamForm" class="tool-panel team-form">
+            <label>
+              Equipo
+              <input id="teamName" type="text" placeholder="Ej. Actuarios Zurich" autocomplete="off" required />
+            </label>
+            <label>
+              Pareja A
+              <input id="pairA" type="text" placeholder="Nombre 1 / Nombre 2" autocomplete="off" />
+            </label>
+            <label>
+              Pareja B
+              <input id="pairB" type="text" placeholder="Nombre 1 / Nombre 2" autocomplete="off" />
+            </label>
+            <label>
+              Grupo
+              <select id="teamGroup">
+                <option value="A">Grupo A</option>
+                <option value="B">Grupo B</option>
+              </select>
+            </label>
+            <button class="primary-action" type="submit">Agregar equipo</button>
+          </form>
+        </div>
+
+        <div id="teamsByGroup" class="group-list"></div>
+      </section>
+
+      <section id="matches" class="panel" aria-labelledby="matches-title">
+        <div class="section-head">
+          <div>
+            <h2 id="matches-title">Resultados</h2>
+            <p>Cada cruce se juega dos veces: una con pareja A y otra con pareja B.</p>
+          </div>
+          <button id="clearScoresBtn" class="secondary-action" type="button">Limpiar resultados</button>
+        </div>
+        <div id="matchesList" class="matches-list"></div>
+      </section>
+
+      <section id="rankings" class="panel" aria-labelledby="rankings-title">
+        <div class="section-head">
+          <div>
+            <h2 id="rankings-title">Ranking por grupos</h2>
+            <p>La tabla suma los resultados de pareja A y pareja B para cada equipo.</p>
+          </div>
+        </div>
+        <div id="rankingsList" class="rankings-list"></div>
+      </section>
+
+      <section id="bracket" class="panel" aria-labelledby="bracket-title">
+        <div class="section-head">
+          <div>
+            <h2 id="bracket-title">Semifinales y final</h2>
+            <p>Los cruces se calculan con el ranking actual y puedes cargar resultados de la ronda final.</p>
+          </div>
+        </div>
+        <div id="bracketView" class="bracket-view"></div>
+      </section>
+    </main>
+
+    <template id="emptyStateTemplate">
+      <div class="empty-state">
+        <strong>No hay datos todavia</strong>
+        <span>Agrega equipos o genera partidos para empezar.</span>
+      </div>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
